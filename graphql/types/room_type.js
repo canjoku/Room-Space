@@ -4,9 +4,7 @@ const graphql = require('graphql');
 const {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLInt,
-    GraphQLBoolean,
-    GraphQLSchema
+    GraphQLInt
 } = graphql;
 
 
@@ -15,10 +13,10 @@ const RoomType = new GraphQLObjectType({
     name: 'Room',
     fields: {
         id: {type: GraphQLString},
-        size: {type: GraphQLInt },
-        status: {type: GraphQLString},
+        roomSize: {type: GraphQLInt },
+        bookingStatus: {type: GraphQLString},
         roomNumber: {type: GraphQLString},
-        location: {type: GraphQLString}
+        roomLocation: {type: GraphQLString}
     }
 })
 

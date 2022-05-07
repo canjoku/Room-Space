@@ -1,13 +1,10 @@
 const graphql = require('graphql');
-const RoomType = require('./room_query_type')
-const UserType = require('./user_query_type')
+const RoomType = require('./room_type')
+const UserType = require('./user_type')
 
 const {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLInt,
-    GraphQLBoolean,
-    GraphQLSchema
 } = graphql;
 
 
@@ -17,7 +14,7 @@ const BookingType = new GraphQLObjectType({
     fields: {
         id: {type: GraphQLString},
         room: {type: RoomType},
-        occupant: {type: UserType},
+        user: {type: UserType},
         date: {type: GraphQLString},
         startTime: {type: GraphQLString},
         endTime: {type: GraphQLString}
