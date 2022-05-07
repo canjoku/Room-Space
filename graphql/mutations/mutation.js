@@ -5,9 +5,6 @@ const UserType = require('../types/user_type');
 const RoomInputType = require('./user_input_type');
 const UserInputType = require('./room_input_type');
 
-
-console.log('plas');
-
 const {
     GraphQLObjectType,
     GraphQLString,
