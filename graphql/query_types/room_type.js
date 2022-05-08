@@ -10,7 +10,7 @@ const {
 
 
 const RoomType = new GraphQLObjectType({
-    name: 'Room',
+    name: 'RoomType',
     fields: {
         id: {type: GraphQLString},
         roomSize: {type: GraphQLInt },
