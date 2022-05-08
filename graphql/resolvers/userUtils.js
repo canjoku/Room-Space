@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
-function createUser(firstName, surname, email, department, password) {
+function createUser(firstName, surname, email, department, password, req) {
     return userModel.findOne({email})
     .then(user => {
         if (user) {
@@ -33,7 +33,7 @@ function createUser(firstName, surname, email, department, password) {
         
 }
 
-async function logInUser(email, password) {
+async function logInUser(email, password, req) {
     return userModel.findOne({email})
     .then(user => {
         if(user) {
@@ -69,14 +69,10 @@ function deleteUser() {
     }
 }
 
-async function getUsers() {
-    const user = userModel
-    return user
-    .find()
+async function getUsers(req) {
+    return userModel.find({})
     .then(users => {
-        return users.map(user => {
-            return user
-        })
+        return users
     })
     .catch(err => {
         throw err;

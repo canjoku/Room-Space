@@ -4,6 +4,8 @@ const UserType = require('./user_type');
 const AuthType = require('./auth_type');
 const roomUtils = require('../resolvers/roomUtils');
 const userUtils = require('../resolvers/userUtils');
+const BookingType = require('./booking_type');
+const bookingUtils = require('../resolvers/bookingUtils');
 
 const {
     GraphQLObjectType,
@@ -18,14 +20,14 @@ const RootQuery = new GraphQLObjectType({
             type: UserType,
             args: {},
             resolve(parentValue, {args}, req) {
-                return userUtils.getUsers()
+                return userUtils.getUsers(req)
             }
         },
         rooms: {
             type: RoomType,
             args: {},
-            resolve(parentValue, {args}, req){
-                return roomUtils.getRooms()
+            resolve(parentValue, {}, req){
+                return roomUtils.getRooms(req)
             }
         },
         logIn: {
@@ -35,9 +37,16 @@ const RootQuery = new GraphQLObjectType({
                 password: {type: GraphQLNonNull(GraphQLString)}
             },
             resolve(parentValue, {email, password}, req) {
-                return userUtils.logInUser(email, password)
+                return userUtils.logInUser(email, password, req)
             }
         },
+        bookings: {
+            type: BookingType,
+            args:{},
+            resolve(parentValue, {args}, req) {
+                bookingUtils.getBookings(req)
+            }
+        }
     }
 });
 

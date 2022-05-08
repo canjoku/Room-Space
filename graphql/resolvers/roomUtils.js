@@ -1,7 +1,10 @@
 const roomModel = require('../models/room_model');
 
 
-function createRoom(roomSize, bookingStatus, roomNumber, roomLocation) {
+function createRoom(roomSize, bookingStatus, roomNumber, roomLocation, req) {
+    if(!req.isAuthenticated) {
+        throw new Error('Unathenticated');
+    }
     const room = new roomModel({
         roomSize,
         bookingStatus,
@@ -19,20 +22,23 @@ function createRoom(roomSize, bookingStatus, roomNumber, roomLocation) {
 }
 
 
-function deleteRoom() {
+function deleteRoom(req) {
+    if(!req.isAuthenticated) {
+        throw new Error('Unathenticated');
+    }
     return {
         hey: "Logout user"
     }
 }
 
-function getRooms() {
-    const rooms = roomModel
-    return rooms
-    .find()
+function getRooms(req) {
+    if(!req.isAuthenticated) {
+        throw new Error('Unathenticated');
+    }
+    return roomModel
+    .find({})
     .then(rooms => {
-        return rooms.map(room => {
-            return room
-        })
+        return rooms;
     })
     .catch(err => {
         throw err;
