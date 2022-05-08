@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_USER" : "chidiebere",
+        "MONGO_PASSWORD" : "myMondoDB",
+        "MONGO_DB": "room-space-consensys"
+    }
+}

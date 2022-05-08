@@ -2,15 +2,15 @@ const graphql = require('graphql');
 
 
 const {
+    GraphQLObjectType,
     GraphQLString,
-    GraphQLInt,
-    GraphQLInputObjectType
+    GraphQLInt
 } = graphql;
 
 
 
-const RoomInputType = new GraphQLInputObjectType({
-    name: 'RoomInput',
+const RoomType = new GraphQLObjectType({
+    name: 'RoomType',
     fields: {
         id: {type: GraphQLString},
         roomSize: {type: GraphQLInt },
@@ -21,4 +21,4 @@ const RoomInputType = new GraphQLInputObjectType({
 })
 
 
-module.exports = RoomInputType;
+module.exports = RoomType;
