@@ -10,26 +10,20 @@ const bookingUtils = require('../resolvers/bookingUtils');
 const {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLList
 } = graphql;
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-        users: {
-            type: UserType,
-            args: {},
+        getUsers: {
+            type: GraphQLList(UserType),
             resolve(parentValue, {args}, req) {
                 return userUtils.getUsers(req)
             }
         },
-        rooms: {
-            type: RoomType,
-            args: {},
-            resolve(parentValue, {}, req){
-                return roomUtils.getRooms(req)
-            }
-        },
+
         logIn: {
             type: AuthType,
             args: {
@@ -40,11 +34,38 @@ const RootQuery = new GraphQLObjectType({
                 return userUtils.logInUser(email, password, req)
             }
         },
-        bookings: {
-            type: BookingType,
-            args:{},
+
+        getRooms: {
+            type: GraphQLList(RoomType),
+            resolve(parentValue, {args}, req){
+                return roomUtils.getRooms(req)
+            }
+        },
+
+        getRoomById: {
+            type: RoomType,
+            args: {
+                _id: {type: GraphQLString}
+            },
+            resolve(parentValue, {_id}, req){
+                return roomUtils.getRoomById(_id, req)
+            }
+        },
+        
+        getBookings: {
+            type: GraphQLList(BookingType),
             resolve(parentValue, {args}, req) {
                 bookingUtils.getBookings(req)
+            }
+        },
+
+        getBookingById: {
+            type: BookingType,
+            args: {
+                _id : {type: GraphQLString}
+            },
+            resolve(parentValue, {_id}, req) {
+                bookingUtils.getBookingById(_id, req)
             }
         }
     }

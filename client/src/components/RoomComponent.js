@@ -1,13 +1,10 @@
-import { Component } from 'react'
+import React from 'react'
+import {ADD_ROOM, DELETE_ROOM, GET_ROOMS, GET_ROOM_BY_ID } from '../queries/room_queries'
 
-class RoomComponent extends Component {
-  render () {
-    return (
-      <div>
-          <h1>The Room component to render within Rooms Component</h1>
-      </div>
-    )
-  }
+export default function RoomComponent() {
+  return (
+  <div>
+    <h1>Room Component</h1>
+    </div>
+  )
 }
-
-export default RoomComponent;

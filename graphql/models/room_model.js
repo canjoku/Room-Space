@@ -1,12 +1,13 @@
 const mongoose = require ('mongoose');
+const uuid = require('uuid');
 const roomSchema = mongoose.Schema({
     roomSize: {
-        type: Number
+        type: Number,
     },
     bookingStatus: {
         type: String
     },
-    roomNumber: {
+    roomName: {
         type: String,
         required: true
     },
