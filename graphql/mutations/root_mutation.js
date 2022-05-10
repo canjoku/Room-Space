@@ -15,7 +15,7 @@ const {
     GraphQLNonNull
 } = graphql;
 
-const mutation = new GraphQLObjectType({
+const Mutation = new GraphQLObjectType({
     name: "Mutation",
     fields: {
         signUp: {
@@ -41,27 +41,36 @@ const mutation = new GraphQLObjectType({
                 userUtils.logOutUser()
             }
         },
+        deleteUser: {
+            type: UserType,
+            args: {
+                _id: {type: GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parentValue, {_id}, req) {
+                return userUtils.deleteUser(_id,req)
+            }
+        },
 
         addRoom: {
             type: RoomType,
             args: {
                 roomSize: {type: GraphQLInt},
                 bookingStatus: {type: GraphQLString},
-                roomNumber: {type: new GraphQLNonNull(GraphQLString)},
+                roomName: {type: new GraphQLNonNull(GraphQLString)},
                 roomLocation: {type: GraphQLNonNull(GraphQLString)}
             },
-            resolve(parentValue, {roomSize, bookingStatus, roomNumber, roomLocation}, req) {
-                return roomUtils.createRoom(roomSize, bookingStatus, roomNumber, roomLocation, req)
+            resolve(parentValue, {roomSize, bookingStatus, roomName, roomLocation}, req) {
+                return roomUtils.createRoom(roomSize, bookingStatus, roomName, roomLocation, req)
             }
         },
 
         deleteRoom: {
             type: RoomType,
             args: {
-                id: {type: GraphQLNonNull(GraphQLString)}
+                _id: {type: GraphQLNonNull(GraphQLString)}
             },
-            resolve(parentValue, {args}, req) {
-                roomUtils.deleteRoom(req)
+            resolve(parentValue, {_id}, req) {
+                return roomUtils.deleteRoom(_id, req)
             }
         },
          makeBooking: {
@@ -81,13 +90,13 @@ const mutation = new GraphQLObjectType({
          cancelBooking: {
             type: BookingType,
             args: {
-               id: {type: GraphQLNonNull(GraphQLString)}
+               _id: {type: GraphQLNonNull(GraphQLString)}
             },
-            resolve() {
-                bookingUtils.cancelBooking
+            resolve(parentValue, {_id}, req) {
+                return bookingUtils.cancelBooking(_id);
             }
          }
     }
 })
 
-module.exports = mutation;
+module.exports = Mutation;

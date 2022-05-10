@@ -1,14 +1,15 @@
 import { Component } from 'react'
 import BookingComponent from '../components/BookingComponent';
 import RoomsComponent from '../components/RoomsComponent';
+import CreateRoomComponent from '../components/CreateRoomComponent';
 
 class HomePage extends Component {
   render () {
     return (
       <div>
-          <div>The Home Page to hold the main page of App. Notice Rooms component and booking component rendered</div>
           <RoomsComponent/>
           <BookingComponent/>
+          <CreateRoomComponent/>
       </div>
     )
   }

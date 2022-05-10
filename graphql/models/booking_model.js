@@ -1,7 +1,9 @@
 const mongoose = require ('mongoose');
-const Room = require('./room_model');
-const User = require('./user_model');
+const uuid = require('uuid');
 const bookingSchema = mongoose.Schema({
+    id: {
+        type: String, default: uuid.v1
+    },
     room: {
         type: mongoose.Schema.Types.ObjectId,ref:'Room'
     },
@@ -9,15 +11,15 @@ const bookingSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,ref:'User'
     },
     date: {
-        type: String,
+        type: Date,
         required: true
     },
     startTime: {
-        type: String,
+        type: Date,
         required: true
     },
     endTime: {
-        type: String,
+        type: Date,
         required: true
     }
 })

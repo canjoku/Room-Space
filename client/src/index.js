@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { BrowserRouter } from "react-router-dom";
 import './css/Index.css';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+
+const client = new ApolloClient({
+  uri: "/graphql/",
+  cache: new InMemoryCache()
+});
+
 
 
 ReactDOM.render(
+  <ApolloProvider client={client}>
   <BrowserRouter>
     <App />
-  </BrowserRouter>,
+  </BrowserRouter>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 

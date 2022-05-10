@@ -12,10 +12,10 @@ const {
 const RoomInputType = new GraphQLInputObjectType({
     name: 'RoomInput',
     fields: {
-        id: {type: GraphQLString},
+        _id: {type: GraphQLString},
         roomSize: {type: GraphQLInt },
         bookingStatus: {type: GraphQLString},
-        roomNumber: {type: GraphQLString},
+        roomName: {type: GraphQLString},
         roomLocation: {type: GraphQLString}
     }
 })

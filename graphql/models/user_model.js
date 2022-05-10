@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
+const uuid = require('uuid');
 const userSchema = mongoose.Schema({
+    id: {
+        type: String, default: uuid.v1
+    },
     firstName: {
         type: String,
         required: true

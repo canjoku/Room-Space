@@ -1,13 +1,10 @@
-import { Component } from 'react'
+import React from 'react'
+import { MAKE_BOOKING, CANCEL_BOOKING, GET_BOOKINGS, GET_BOOKINGS_BY_ID  } from '../queries/booking_queries'
 
-class BookingComponent extends Component {
-  render () {
-    return (
-      <div>
-          <h1>The Booking Component to Render on Home Page alongside rooms component</h1>
-      </div>
-    )
-  }
+export default function BookingComponent() {
+  return (
+  <div>
+    <h2>Booking Component On this page</h2>
+  </div>
+  )
 }
-
-export default BookingComponent;

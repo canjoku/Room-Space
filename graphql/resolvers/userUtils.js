@@ -63,21 +63,28 @@ function logOutUser() {
     }
 }
 
-function deleteUser() {
-    return {
-        hey: "Waiting to decide"
+function deleteUser(_id, req) {
+    if(!req.isAuthenticated) {
+        throw new Error('Unathenticated');
     }
+    return userModel.findOneAndRemove({_id})
+    .then(user => {
+        return user
+    })
+    .catch(err => {
+        throw err
+    })
 }
 
 async function getUsers(req) {
-    return userModel.find({})
+    return userModel
+    .find()
     .then(users => {
         return users
     })
     .catch(err => {
         throw err;
     })
-
 }
 
 

@@ -8,9 +8,9 @@ function makeBooking (room, user, date, startTime, endTime, req) {
     const booking = new bookingModel({
         room,
         user,
-        date,
-        startTime,
-        endTime
+        date : new Date(date),
+        startTime: new Date(startTime),
+        endTime: new Date(endTime)
     })
     return booking
     .save()
@@ -22,15 +22,25 @@ function makeBooking (room, user, date, startTime, endTime, req) {
     })
 }
 
-function cancelBooking(parentValue, args, req) {
+function cancelBooking(_id, req) {
     if(!req.isAuthenticated) {
         throw new Error('Unathenticated');
     }
+    return bookingModel.findOneAndRemove({_id})
+    .then(booking => {
+        return booking
+    })
+    .catch(err => {
+        throw err
+    })
 }
 
 function getBookings(req) {
+    if(!req.isAuthenticated) {
+        throw new Error('Unathenticated');
+    }
     return bookingModel
-    .find({})
+    .find()
     .then(bookings => {
         return bookings
     })
@@ -40,5 +50,20 @@ function getBookings(req) {
 
 }
 
+function getBookingById(_id, req) {
+    if(!req.isAuthenticated) {
+        throw new Error('Unathenticated');
+    }
+    return bookingModel
+    .findOne({_id})
+    .then(booking => {
+        return booking
+    })
+    .catch(err => {
+        throw err
+    })
 
-module.exports = {makeBooking, cancelBooking, getBookings}
+}
+
+
+module.exports = {makeBooking, cancelBooking, getBookings, getBookingById}

@@ -12,7 +12,7 @@ const {
 const BookingType = new GraphQLObjectType({
     name: 'BookingType',
     fields: {
-        id: {type: GraphQLString},
+        _id: {type: GraphQLString},
         room: {type: RoomType},
         user: {type: UserType},
         date: {type: GraphQLString},
